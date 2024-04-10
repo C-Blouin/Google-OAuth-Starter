@@ -40,32 +40,22 @@
                                 <a class="nav-link" aria-current="page" href="/">Home</a>
                             </li>                
                             {{!-- IF a user is logged in, display the following username and logout links. --}}
-                            {{#if user}}
+                            {{#if user}}                            
 
-                                {{!-- STEP: 10B (Final Step!). Uncomment the list items in the header and footer to reveal the displayName tied to the google account you signed into. --}}
-
-                                {{!-- <li class="nav-item">
+                                <li class="nav-item">
                                     <a class="nav-link" aria-current="page" href="/authenticated">Authenticated</a>
-                                </li> --}}
+                                </li>
 
                                 {{!-- Check if the user is a local user or a google user. Display the username of the corresponding user type. --}}
                                 {{#if user.username}}
-                                    {{!-- <li class="nav-item">
+                                    <li class="nav-item">
                                         <a class="nav-link" href="#">{{user.username}}</a>
-                                    </li> --}}
+                                    </li>
                                 {{else}}
 
-                                    {{!-- <li class="nav-item">
+                                    <li class="nav-item">
                                         <a class="nav-link" href="#">{{user.displayName}}</a>
-                                    </li> --}}
-
-                                    {{!-- 
-                                    
-                                    STEP10 NOTE:
-
-                                    You may notice our disaplyName doesn’t have our googleUser object attached. This is because Passport.js by default removes the specific user type, being local or a Google user, and provides use a consistent way to retrieve the user by using req.user in our routes.
-                                    
-                                     --}}
+                                    </li>
 
                                 {{/if}}
                                 <li class="nav-item">
@@ -110,18 +100,18 @@
                    
                     {{#if user}}
 
-                        {{!-- <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="/authenticated">Authenticated</a>
-                        </li> --}}
+                        </li>
                         {{!-- Check if the user is a local user or a google user. Display the username of the corresponding user type. --}}
                         {{#if user.username}}
-                            {{!-- <li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link" href="#">{{user.username}}</a>
-                            </li> --}}
+                            </li>
                         {{else}}
-                            {{!-- <li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link" href="#">{{user.displayName}}</a>
-                            </li> --}}
+                            </li>
                         {{/if}}
                         <li class="nav-item">
                             <a class="nav-link" href="/auth/logout">Logout</a>

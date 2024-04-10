@@ -13,10 +13,13 @@ let auth = require('./controllers/auth');
 let mongoose = require('mongoose');
 let dotenv = require('dotenv');
 
-// STEP 2A: Enable Passport & Session Support, and import the passport and express-session modules.
+
+let passport = require('passport');
+let session = require('express-session');
 
 
-// STEP 2B: Import the Local User Model & Google User Models. We will be focusing on Google User, and to implement Google Authentication, we will pass this model into a Google Strategy for Passport to use when authenticating users.
+let User = require('./models/user');
+// // STEP 2A: Import the Google User Model. We will be focusing on Google User's, and to implement Google Authentication, we will pass this model into a Google Strategy for Passport to use when authenticating users.
 
 
 // Load environment variables from the .env file.
@@ -45,74 +48,68 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret: process.env.PASSPORT_SECRET,
+  resave: true,
+  saveUninitialized: false
+}));
 
-// STEP 2C: Configuring Express Session Support, we will allow users to remain logged in when navigating between pages.
-// STEP 2D: Initialize Passport Session Support.
+app.use(passport.initialize());
+app.use(passport.session());
 
-
-// STEP 2E: Allow the application to use Passport for authentication. We must define to use session support before defining routes to ensure the session is available first to prevent errors.
-
-
-// Configuring the Passport Authentication Strategies for local and google user's of the application. To learn more about the Google Strategy, visit the Passport Google OAuth20 documentation here: https://www.passportjs.org/packages/passport-google-oauth2/
-
-// STEP 3A: Allow the user to authenticate using the local strategy.
-
-
-// STEP 3B: Define the Google Strategy, by importing the Google Strategy from the passport-google-oauth20 module.
+passport.use(User.createStrategy());
 
 
+// Configuring the Passport Authentication Strategy for google user's of the application. To learn more about the Google Strategy, visit the Passport Google OAuth20 documentation here: https://www.passportjs.org/packages/passport-google-oauth2/
 
-// STEP 3C: Configure the Google Strategy for Passport to use when authenticating users. Creating the initial skeleton of the Strategy, to then populate with the options required to authenticate users. (Client ID, Client Secret, Callback URL, and the function to be executed when a user is authenticated).
+// STEP 3A: Define the Google Strategy, by importing the Google Strategy from the passport-google-oauth20 module.
+
+// STEP 3B: Configure the Google Strategy for Passport to use when authenticating users.
+
+  // STEP 3C: Define the Google Strategy options. Including the Client ID, Client Secret, and Callback URL.
+
+  // STEP 3D: Assigning values to the options, we will set the ClientID and Secret from the environment variables for security purposes. And then define the Callback URL for the Google authentication routing.
+
+  // STEP 3E: Define the asynchronous function to be executed when a user is authenticated. Passing the request, access token, refresh token, profile, and done callback to the function.
 
 
-  // STEP 3D: Define the Google Strategy options. Including the Client ID, Client Secret, and Callback URL.
-  // STEP 3E: Assigning values to the options, we will set the ClientID and Secret from the environement variables for security purposes. And then define the Callback URL for the Google authentication routing.
- 
-
-  // STEP 3F: Define the skeleton code for the function to be executed when a user is authenticated. Passing the request, access token, refresh token, profile, and done callback to the function.
-
-
-  // STEP 4A: Structure a try/catch block, so we can add authentication logic to the Google Strategy. 
-
+  // STEP 4A: Structure a try/catch block, so we can add authentication logic to the Google Strategy, and prevent the application from crashing if errors occur.
 
     // STEP 4B: Declare a variable to store the Google User, and we will search for any existing user's in our googleUser model database documents by their Google ID.
-    
 
-    // STEP 4C: Write a conditional statement to check if a googleUser is present in the database, if not, create a new Google User and store their Google ID and Display Name.
-    
+    // STEP 4C: Write a conditional statement to check if a googleUser is present in the database, if not, we will create a new Google User and store their Google ID and Display Name.
 
     // STEP 4D: IF a user exists, return the Google User to the done callback, as a user now exists in the database, which we can now use when serializing and deserializing users into a session.
-    
 
-    // STEP 4E: IF an error occurs, we can return the error to the done callback. We do this to handle the error while preventing the application from crashing.
-  
+    // STEP 4E: IF an error occurs, we can return the error to the done callback. We would like to handle any errors to prevent the application from crashing.
 
-// STEP 5A: We must now serialize the user into a session by storing their ID in the session. IF we don't serialize the user, we will get an error that we couldn't serialize the user into the session, meaning we can't store the user in the session.
+
+
+// STEP 5A: We must now serialize the user into a session by storing their ID in the session.
+
 // STEP 5B: Pass the user object and the done callback to the serializeUser method.
 
-  // STEP 5C: Call the done callback and store the user's ID in the session.
+  // STEP 5C: Call the done callback to store the user's ID in the session.
 
 
-// STEP 6A: Creating the skeleton code for the deserializeUser method, which will be used to retrieve the user from the session.
-// STEP 6B: Pass the ID and done callback to the deserializeUser method. We will write this code asynchronously as we are querying a database, which may take some time to complete.
+// STEP 6A: Create the skeleton code for the deserializeUser method, which will be used to retrieve the user from the session.
 
+// STEP 6B: Pass the ID and done callback to the deserializeUser method.
 
   // STEP 6C: Structure a try/catch block to handle the deserialization of the user.
 
+  // STEP 6D: Search for any existing user's in our local user model database documents by their ID.
 
-      // STEP 6D: Search for any existing user's in our local user model database documents by their ID.
-
-
-      // STEP 6E: Check IF a user is present in the database, is so we will return it.
-
-
+  // STEP 6E: Check IF a user is present in the database, if there is a user, we will return it.
+    
       // STEP 6F: IF no local user is found, we will search for a Google user by their ID in the Google User model and return the Google user. IF a google user is not found, we will return null.
-     
 
   // STEP 6G: In our catch statement, we will return any errors that occur.
 
-  
-// STEP 7: Let's test our application to see if we can register as a Google user. We will encounter an error, does anyone have any ideas why we can't register as a Google user?
+
+
+
+// STEP 7: Let's test our application to see if we can register as a Google user. We will encounter an error? Does anyone have anyt ideas of what could be preventing us from registering as a Google User?
 
 // Defining the routes for the application.
 app.use('/', index);
