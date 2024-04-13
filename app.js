@@ -66,7 +66,7 @@ passport.use(User.createStrategy());
 
 // STEP 3B: Configure the Google Strategy for Passport to use when authenticating users.
 
-  // STEP 3C and 3D: Define the Google Strategy options. Including the Client ID, Client Secret, and Callback URL. Assigning values to the options, we will set the ClientID and Secret from the environment variables for security purposes. And then define the Callback URL for the Google authentication routing.
+  // STEP 3C and 3D: Define the Google Strategy options. Including the Client ID, Client Secret, and Callback URL. And then assigning values to the options, we will set the ClientID and Secret from the environment variables for security purposes. And then define the Callback URL for the Google authentication routing.
 
   // STEP 3E: Define the asynchronous function to be executed when a user is authenticated. Passing the request, access token, refresh token, profile, and done callback to the function.
 
@@ -106,7 +106,7 @@ passport.use(User.createStrategy());
 
 
 
-// STEP 7: Let's test our application to see if we can register as a Google user. We will encounter an error? Does anyone have anyt ideas of what could be preventing us from registering as a Google User?
+// STEP 7: Let's test our application to see if we can register as a Google user. We will encounter an error? Does anyone have any ideas of what could be preventing us from registering as a Google User?
 
 // Defining the routes for the application.
 app.use('/', index);
