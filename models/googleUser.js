@@ -4,5 +4,4 @@
 
     // STEP 1C: Define the properties of the Google User Schema. In our model, we will store the GoogleId and the displayName of our users.
 
-
 // STEP 1D: Export the Google User model for usage throughout the application.

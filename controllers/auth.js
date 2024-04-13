@@ -90,11 +90,11 @@ router.get('/unauthorized', (req, res) => {
     // STEP 8B: Define the scope of the Google Sign-In, which will be used to retrieve the user's profile and email.
 
 
-
 // GET: /auth/google/callback => handle Google Sign-In callback
 // STEP 9A: Define the GET route for the Google Sign-In callback. This route will be used to handle the callback from Google Sign-In, which will be used to authenticate the user and log them into the application.
 
 
+// STEP 9B: Define the callback route for the Google Sign-In, which will be used to authenticate the user and log them into the application.
 
 
 // STEP 10A: Test our application to see if we can now log in without issues!

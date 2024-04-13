@@ -66,12 +66,9 @@ passport.use(User.createStrategy());
 
 // STEP 3B: Configure the Google Strategy for Passport to use when authenticating users.
 
-  // STEP 3C: Define the Google Strategy options. Including the Client ID, Client Secret, and Callback URL.
-
-  // STEP 3D: Assigning values to the options, we will set the ClientID and Secret from the environment variables for security purposes. And then define the Callback URL for the Google authentication routing.
+  // STEP 3C and 3D: Define the Google Strategy options. Including the Client ID, Client Secret, and Callback URL. Assigning values to the options, we will set the ClientID and Secret from the environment variables for security purposes. And then define the Callback URL for the Google authentication routing.
 
   // STEP 3E: Define the asynchronous function to be executed when a user is authenticated. Passing the request, access token, refresh token, profile, and done callback to the function.
-
 
   // STEP 4A: Structure a try/catch block, so we can add authentication logic to the Google Strategy, and prevent the application from crashing if errors occur.
 
